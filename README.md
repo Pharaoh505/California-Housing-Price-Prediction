@@ -1,5 +1,29 @@
 This project uses a Gradient Boosting Regressor model to predict house prices in California based on features such as median income, house age, and more. The app is built using Streamlit to provide an interactive web interface where users can input values and receive predictions.
 
+Approach
+
+ Models Tried:
+ 
+1. **MLP Regressor (Multilayer Perceptron Regressor)**:
+   - Initially, I tried using an MLP Regressor (a type of neural network) to predict house prices.
+   - However, the MLP Regressor produced worse results compared to Gradient Boosting Regressor. Despite being a powerful model for learning complex relationships, MLP struggled with the dataset, resulting in a lower R-squared score and higher Mean Squared Error (MSE).
+   
+   **MLP Regressor Results:**
+   - R-squared: ~0.46 (lower than Gradient Boosting)
+   - Mean Squared Error: ~0.71 (worse than Gradient Boosting)
+
+2. **Gradient Boosting Regressor**:
+   - After experimenting with MLP Regressor, I switched to Gradient Boosting Regressor.
+   - This model delivered better performance with a higher R-squared score and lower Mean Squared Error, making it more suitable for this particular regression task.
+   
+   **Gradient Boosting Regressor Results:**
+   - R-squared: ~0.78
+   - Mean Squared Error: ~0.29
+
+Conclusion:
+
+- The Gradient Boosting Regressor outperformed the MLP Regressor due to its ability to model complex interactions between features more effectively for this dataset. The MLP Regressor struggled with overfitting and failed to capture the relationships between the features as well as Gradient Boosting.
+
 
 The model predicts the price of a house in California given the following input features:
 
