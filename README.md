@@ -14,14 +14,17 @@ The model predicts the price of a house in California given the following input 
 - Latitude and longitude of the house
   
 - Median house value in the area
+  
 
-- The dependencies include:
+  The dependencies include:
 
 streamlit: For building the web application.
 
 scikit-learn: For implementing the Gradient Boosting Regressor model.
 
 numpy: For numerical operations.
+
+
 
 
 Model: Gradient Boosting Regressor
