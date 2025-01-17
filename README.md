@@ -4,15 +4,15 @@ This project uses a Gradient Boosting Regressor model to predict house prices in
 The model predicts the price of a house in California given the following input features:
 
 - Median income of the area
-- 
+  
 - Age of the house
-- 
+  
 - Average number of rooms in the house
-- 
+  
 - Average number of occupants per house
-- 
+  
 - Latitude and longitude of the house
-- 
+  
 - Median house value in the area
 
 - The dependencies include:
