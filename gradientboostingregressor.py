@@ -486,7 +486,7 @@
    "execution_count": 28,
    "id": "b4caf3ae-e935-4586-80bc-63c5c1827c2b",
    "metadata": {
-    "scrolled": true
+    "scrolled": True
    },
    "outputs": [
     {
