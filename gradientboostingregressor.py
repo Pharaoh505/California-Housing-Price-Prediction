@@ -4,15 +4,20 @@ from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.datasets import fetch_california_housing
 
-#Load the dataset
-california = fetch_california_housing()
-X = california.data
-y = california.target
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+@st.cache
+def load_model():
+    #Load and train the model only once
+    california = fetch_california_housing()
+    X = california.data
+    y = california.target
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    
+    model = GradientBoostingRegressor(n_estimators=100, random_state=42)
+    model.fit(X_train, y_train)
+    return model
 
-#Train the Gradient Boosting Regressor
-gb_regressor = GradientBoostingRegressor(n_estimators=100, random_state=42)
-gb_regressor.fit(X_train, y_train)
+#Load the trained model
+model = load_model()
 
 #Streamlit app layout
 st.title("California Housing Price Prediction")
@@ -31,7 +36,7 @@ AveHouseValue = st.number_input("Average House Value (in $100,000s)", min_value=
 input_data = np.array([[MedInc, HouseAge, AveRooms, AveOccup, Latitude, Longitude, MedVal, AveHouseValue]])
 
 #Make prediction using the trained model
-prediction = gb_regressor.predict(input_data)
+prediction = model.predict(input_data)
 
 #Display the predicted house price
 st.write(f"The predicted house price is: ${prediction[0] * 100000:.2f}")
