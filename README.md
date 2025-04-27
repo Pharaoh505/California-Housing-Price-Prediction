@@ -65,3 +65,5 @@ n_estimators: 100
 random_state: 42
 
 California Housing dataset: The dataset is publicly available from the UCI Machine Learning Repository.
+
+This project is licensed under the MIT License.
