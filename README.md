@@ -1,3 +1,9 @@
+Update:
+- Added a prediction counter
+- Added a prediction chart
+- Added a prediciton summary panel
+
+
 This project uses a Gradient Boosting Regressor model to predict house prices in California based on features such as median income, house age, and more. The app is built using Streamlit to provide an interactive web interface where users can input values and receive predictions.
 
 
