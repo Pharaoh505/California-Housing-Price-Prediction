@@ -1,5 +1,6 @@
 import streamlit as st
 import numpy as np
+import matplotlib.pyplot as plt
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.datasets import fetch_california_housing
@@ -10,7 +11,7 @@ def load_model():
     X = california.data
     y = california.target
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-    
+
     model = GradientBoostingRegressor(n_estimators=100, random_state=42)
     model.fit(X_train, y_train)
     return model
@@ -30,6 +31,33 @@ AveHouseValue = st.number_input("Average House Value (in $100,000s)", min_value=
 
 input_data = np.array([[MedInc, HouseAge, AveRooms, AveOccup, Latitude, Longitude, MedVal, AveHouseValue]])
 
+if "predictions" not in st.session_state:
+    st.session_state.predictions = []
+
 prediction = model.predict(input_data)
+st.session_state.predictions.append(prediction[0])
 
 st.write(f"The predicted house price is: ${prediction[0] * 100000:.2f}")
+
+if st.session_state.predictions:
+    avg_price = np.mean(st.session_state.predictions)
+    st.markdown("---")
+    st.subheader("📊 Prediction Summary")
+    st.write(f"Total Predictions Made: {len(st.session_state.predictions)}")
+    st.write(f"Average Predicted Price: ${avg_price * 100000:.2f}")
+
+    low = sum(p < 2 for p in st.session_state.predictions)
+    mid = sum(2 <= p < 5 for p in st.session_state.predictions)
+    high = sum(p >= 5 for p in st.session_state.predictions)
+    total = len(st.session_state.predictions)
+
+    st.write(f"% < $200k: {100 * low / total:.2f}%")
+    st.write(f"% between $200k–$500k: {100 * mid / total:.2f}%")
+    st.write(f"% > $500k: {100 * high / total:.2f}%")
+
+    fig, ax = plt.subplots()
+    ax.plot(st.session_state.predictions, marker='o', linestyle='-')
+    ax.set_title("Predicted Prices Over Time")
+    ax.set_ylabel("Price ($100,000s)")
+    ax.set_xlabel("Prediction #")
+    st.pyplot(fig)
